@@ -1,5 +1,5 @@
-from masks import get_mask_account
-from masks import get_mask_card
+from src.masks import get_mask_account
+from src.masks import get_mask_card
 
 
 def mask_account_card(account_card: str) -> str:
@@ -11,6 +11,9 @@ def mask_account_card(account_card: str) -> str:
     else:
         mask = get_mask_card(acc_card[-1])
     return str(" ".join(acc_card[0:-1]) + " " + mask)
+
+
+print(mask_account_card("73654108430135874305"))
 
 
 def get_date(date: str) -> str:

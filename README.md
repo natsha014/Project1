@@ -33,6 +33,29 @@ executed_ops = filter_by_state(operations)
 # Сортировка по дате
 sorted_ops = sort_by_date(operations)
 ```
+## Тестирование:
+
+1. Установка Pytest:
+```
+# Установка через Poetry
+poetry add --group dev pytest
+```
+
+2. Запуск тестов:
+```
+# команда для запуска тестов
+pytest
+```
+
+3. Структура тестов:
+
+тестовые файлы находятся в папке [tests] (./tests)
+
+4. Покрытие тестами:
+```
+# команда для проверки покрытия тестами
+pytest --cov=src --cov-report=html
+```
 
 ## Документация:
 
