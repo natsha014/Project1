@@ -9,16 +9,21 @@
 1. Убедись, что у тебя установлен Python версии 3.13.5
 
 2. Клонируй репозиторий
+
 ```
 git clone https://github.com/username/project-x.git
 ```
+
 3. Установи зависимости
+
 ```
 pip install -r requirements.txt
 ```
+
 ## Использование:
 
 Пример использования функций:
+
 ```
 from src.processing import filter_by_state, sort_by_date
 
@@ -33,15 +38,18 @@ executed_ops = filter_by_state(operations)
 # Сортировка по дате
 sorted_ops = sort_by_date(operations)
 ```
+
 ## Тестирование:
 
 1. Установка Pytest:
+
 ```
 # Установка через Poetry
 poetry add --group dev pytest
 ```
 
 2. Запуск тестов:
+
 ```
 # команда для запуска тестов
 pytest
@@ -52,9 +60,31 @@ pytest
 тестовые файлы находятся в папке [tests] (./tests)
 
 4. Покрытие тестами:
+
 ```
 # команда для проверки покрытия тестами
 pytest --cov=src --cov-report=html
+```
+
+## Генераторы:
+
+```
+from src.generators import filter_by_currency, transaction_descriptions, card_number_generator
+
+# Функция поочередно выдает транзакции, где валюта операции соответствует заданной (например, USD)
+usd_transactions = filter_by_currency(transactions, "USD")
+
+# Функция возвращает описание каждой операции по очереди.
+descriptions = transaction_descriptions(transactions)
+
+# Генератор может сгенерировать номера карт в заданном диапазоне от 0000 0000 0000 0001 до 9999 9999 9999 9999.
+for card_number in card_number_generator(1, 3):
+    print(card_number)
+
+>>> 0000 0000 0000 0001
+    0000 0000 0000 0002
+    0000 0000 0000 0003
+
 ```
 
 ## Документация:
