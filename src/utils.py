@@ -3,11 +3,13 @@ import logging
 import os
 
 logger = logging.getLogger("utils")
-file_handler = logging.FileHandler("../logs/utils.log", mode="w", encoding="utf-8")
-file_formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s: %(message)s")
-file_handler.setFormatter(file_formatter)
-logger.addHandler(file_handler)
-logger.setLevel(logging.DEBUG)
+logging.basicConfig(
+    level=logging.DEBUG,
+    filename="../logs/utils.log",
+    filemode="w",
+    encoding="utf-8",
+    format="%(asctime)s - %(name)s - %(levelname)s: %(message)s",
+)
 
 
 def load_operations(path: str) -> list[dict] | dict:
@@ -24,6 +26,3 @@ def load_operations(path: str) -> list[dict] | dict:
                 logger.error("Файл не является списком")
                 return []
             return oper_file
-
-
-print(load_operations("../data/operations.json"))
