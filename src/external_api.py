@@ -12,8 +12,8 @@ url = "https://api.apilayer.com/exchangerates_data/convert"
 def amount_transactions(transactions: list[dict] | dict) -> float:
     """функция принимает на вход транзакцию и возвращает сумму транзакции в рублях"""
     for trans in transactions:
-        currency = trans.get("operationAmount").get("currency").get("code")
-        amount_cur = float(trans.get("operationAmount").get("amount"))
+        currency = trans.get("operationAmount", {}).get("currency", {}).get("code")
+        amount_cur = float(trans.get("operationAmount", {}).get("amount"))
         if currency == "RUB":
             amount = amount_cur
             print(amount)

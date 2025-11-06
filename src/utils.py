@@ -5,7 +5,7 @@ import os
 logger = logging.getLogger("utils")
 logging.basicConfig(
     level=logging.DEBUG,
-    filename="../logs/utils.log",
+    filename=os.path.join(os.path.dirname(__file__), "..", "logs", "utils.log"),
     filemode="w",
     encoding="utf-8",
     format="%(asctime)s - %(name)s - %(levelname)s: %(message)s",
@@ -21,7 +21,16 @@ def load_operations(path: str) -> list[dict] | dict:
     else:
         with open(path, encoding="utf-8") as f:
             oper_file = json.load(f)
-            logger.info("Получен писок словарей с данными о финансовых транзакциях")
+            logger.info("Получен список словарей с данными о финансовых транзакциях")
+            for i in oper_file:
+                # Проверяем и разворачиваем вложенные данные
+                if "operationAmount" in i: #pragma: no cover
+                    i["amount"] = i["operationAmount"]["amount"]
+                    i["currency_name"] = i["operationAmount"]["currency"]["name"]
+                    i["currency_code"] = i["operationAmount"]["currency"]["code"]
+                    # Удаляем вложенный элемент, если больше не нужен
+                    del i["operationAmount"]
+
             if not isinstance(oper_file, list):
                 logger.error("Файл не является списком")
                 return []
